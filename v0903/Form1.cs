@@ -24,8 +24,35 @@ namespace v0903
 
         private void timer1_Tick(object sender, EventArgs e)
         {
+            Point mp = MousePosition;
+            mp = PointToClient(mp);
             label1.Left += vx;
             label1.Top += vy;
+            if (label1.Left < 0)
+            {
+                vx = Math.Abs(vx);
+            }
+            if (label1.Right > ClientSize.Width)
+            {
+                vx = -Math.Abs(vx);
+            }
+            if (label1.Top < 0)
+            {
+                vy = Math.Abs(vy);
+            }
+            if (label1.Bottom > ClientSize.Height)
+            {
+                vy = -Math.Abs(vy);
+            }
+            if(label1.Left<mp.X&&label1.Right>=mp.X&&label1.Top<mp.Y&&label1.Bottom>=mp.Y)
+            {
+                timer1.Enabled = false;
+            }
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            timer1.Enabled = true;
         }
     }
 }
